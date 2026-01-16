@@ -180,18 +180,22 @@ function toggleTheme() {
 // Функция переключения анимаций
 function toggleAnimations() {
     animationsEnabled = !animationsEnabled;
-    const animatedElements = document.querySelectorAll('.animated-background, .pulse-animation, .logo, .shape, .particles::before, .logo-glow, .icon-glow, .modal-icon-glow');
+    const animatedElements = document.querySelectorAll('.animated-background, .pulse-animation, .logo, .shape, .logo-glow, .icon-glow, .modal-icon-glow, .stars-container, .shooting-stars, .sun, .sun-glow, .sun-rays, .cloud, .flare');
     
     if (animationsEnabled) {
         animatedElements.forEach(el => {
-            el.style.animationPlayState = 'running';
+            if (el.style) {
+                el.style.animationPlayState = 'running';
+            }
         });
         toggleAnimationsBtn.innerHTML = '<i class="fas fa-pause"></i> Пауза анимаций';
         toggleAnimationsBtn.title = 'Приостановить анимации';
         showNotification('Анимации включены', 'success');
     } else {
         animatedElements.forEach(el => {
-            el.style.animationPlayState = 'paused';
+            if (el.style) {
+                el.style.animationPlayState = 'paused';
+            }
         });
         toggleAnimationsBtn.innerHTML = '<i class="fas fa-play"></i> Анимации';
         toggleAnimationsBtn.title = 'Включить анимации';
@@ -560,7 +564,7 @@ function showUndoDeleteNotification(network, index) {
     notification.innerHTML = `
         <i class="fas fa-trash-restore"></i>
         <span>Нейросеть "${network.name}" удалена</span>
-        <button id="undoDelete" style="margin-left: 15px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+        <button id="undoDelete" style="margin-left: 15px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; pointer-events: auto;">
             Отменить
         </button>
     `;
